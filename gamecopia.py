@@ -1,4 +1,4 @@
-
+from tkinter import FALSE
 import pygame as pg
 
 pg.init()
@@ -31,7 +31,7 @@ class Nave():
         if self.x + self.rect.w >= self.padre.get_width():
             self.x = self.padre.get_width() - self.rect.w
 
-class Bala():
+class Ball():
     def __init__(self,padre, x, y):
         self.imagen = pg.image.load("./img/ball.png")
         self.rect = self.imagen.get_rect()
@@ -55,10 +55,10 @@ class Bala():
           if evento.type == pg.KEYDOWN:
                     if evento.key == pg.K_SPACE:
                         self.ball.x = self.nave.x
-                        self.bala.y = self.nave.y -20
-                        self.disparos.append(self.bala)
+                        self.ball.y = self.nave.y -20
+                        self.disparos.append(self.ball)
                         if len(self.disparos)> 1:
-                            self.disparos.remove(self.bala)
+                            self.disparos.remove(self.ball)
             
         
             
@@ -68,7 +68,7 @@ class Game():
         self.pantalla = pg.display.set_mode((ancho, alto))
         self.nave = Nave(self.pantalla, ancho //2, alto-80)
         self.reloj = pg.time.Clock()
-        self.bala = Bala(self.pantalla, ancho//2, alto-110 )
+        self.ball = Ball(self.pantalla, ancho//2, alto-110 )
         self.disparos= []
     
     
@@ -97,7 +97,7 @@ class Game():
             
             self.pantalla.fill((255, 234, 123))
             
-            self.bala.disparo()
+            self.ball.disparo()
             
             for element in self.disparos:
                 

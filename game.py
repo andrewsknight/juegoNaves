@@ -83,8 +83,8 @@ class Game():
                         self.ball.x = self.nave.x
                         self.ball.y = self.nave.y -20
                         self.disparos.append(self.ball)
-                        if len(self.disparos)> 1:
-                            self.disparos.remove(self.ball)
+                    if len(self.disparos)> 1:
+                        self.disparos.remove(self.ball)
                         
                         
                         
