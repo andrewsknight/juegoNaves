@@ -1,4 +1,4 @@
-from tkinter import FALSE
+
 import pygame as pg
 
 pg.init()
@@ -42,23 +42,17 @@ class Ball():
     
     def dibujar(self):
                 
-                self.padre.blit(self.imagen, (self.x, self.y))
+        self.padre.blit(self.imagen, (self.x, self.y))
 
 
     def mover(self):
         
         self.y -= self.vy
-        
-    def disparo(self):
-        eventos = pg.event.get()
-        for evento in eventos:
-          if evento.type == pg.KEYDOWN:
-                    if evento.key == pg.K_SPACE:
-                        self.ball.x = self.nave.x
-                        self.ball.y = self.nave.y -20
-                        self.disparos.append(self.ball)
-                        if len(self.disparos)> 1:
-                            self.disparos.remove(self.ball)
+    
+    def reposo(self, otro):
+        self.y == otro.y
+        self.x == otro.x
+    
             
         
             
@@ -68,6 +62,7 @@ class Game():
         self.pantalla = pg.display.set_mode((ancho, alto))
         self.nave = Nave(self.pantalla, ancho //2, alto-80)
         self.reloj = pg.time.Clock()
+
         self.ball = Ball(self.pantalla, ancho//2, alto-110 )
         self.disparos= []
     
@@ -86,7 +81,15 @@ class Game():
             for evento in eventos:
                 if evento.type == pg.QUIT:
                     game_over = True
-              
+                if evento.type == pg.KEYDOWN:
+                    if evento.key == pg.K_SPACE:
+                        
+                        self.ball.x = self.nave.x
+                        self.ball.y = self.nave.y -20
+                        self.disparos.append(self.ball)
+                if self.ball.y <= 0:
+                    self.disparos.remove(self.ball) 
+                    self.ball.reposo(self.nave)
                         
                         
                         
@@ -97,7 +100,6 @@ class Game():
             
             self.pantalla.fill((255, 234, 123))
             
-            self.ball.disparo()
             
             for element in self.disparos:
                 

@@ -1,4 +1,4 @@
-from tkinter import FALSE
+
 import pygame as pg
 
 pg.init()
@@ -42,7 +42,7 @@ class Ball():
     
     def dibujar(self):
                 
-                self.padre.blit(self.imagen, (self.x, self.y))
+        self.padre.blit(self.imagen, (self.x, self.y))
 
 
     def mover(self):
@@ -80,11 +80,11 @@ class Game():
                     game_over = True
                 if evento.type == pg.KEYDOWN:
                     if evento.key == pg.K_SPACE:
-                        self.ball.x = self.nave.x
-                        self.ball.y = self.nave.y -20
-                        self.disparos.append(self.ball)
-                    if len(self.disparos)> 1:
-                        self.disparos.remove(self.ball)
+                        
+                        self.disparo = Ball(self.pantalla,self.nave.x, self.nave.y-20)
+                        self.disparos.append(self.disparo)
+                        if self.disparo.y == 0: 
+                             self.disparos.remove(self.disparo)
                         
                         
                         
